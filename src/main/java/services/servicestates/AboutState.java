@@ -8,7 +8,7 @@ public class AboutState implements ServiceState {
     final String PRESENTATION_TEXT = """
             *Бескрылый* бот. Ассистент по бескрылкам\s
             \s
-            _Чтобы узнать список команд введите:_\s
+            Чтобы узнать список команд введите:\s
             /help  \s
             """;
 

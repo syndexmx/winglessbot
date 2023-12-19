@@ -26,10 +26,10 @@ public class AddState implements ServiceState {
            ===========\s
            Добавляйте: \s
            """;
+
     @Override
     public ServiceState processRequest(TelegramBotController tController, String input, long chatId) {
         int addedCount = WinglessService.addNewPortion(input);
-        //TODO : Обработать полученные бескрылки
         tController.sendMessage("Добавлено бескрылок: " + addedCount, chatId);
         return new GeneralState();
     }

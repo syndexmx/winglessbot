@@ -27,7 +27,9 @@ public class ServiceStateSwitcher {
             case ("/about") -> {
                 state = new AboutState();
             }
-
+            case ("/checkout") -> {
+                state = new CheckoutState();
+            }
             case ("/adminshelp") -> {
                 state = new AdminsInstructionState();
             }
@@ -35,10 +37,21 @@ public class ServiceStateSwitcher {
                 return new AboutState();
             }
         }
-
         state = state.onEnter(tController, s, chatId);
         return state;
     }
 
+    public static ServiceState switchToMonoState(TelegramBotController tController, String s, long chatId) {
+        ServiceState state;
+
+        if (s.length()<5) {
+                state = new BringForwardState();
+            } else {
+                state = new BringForwardState();
+            }
+
+        state = state.onEnter(tController, s, chatId);
+        return state;
+    }
 
 }

@@ -5,7 +5,9 @@ public class WinglessPiece {
 
     private String task;
 
+
     private String solution="";
+
     private boolean solved=false;
 
     private boolean sure=true;
@@ -29,6 +31,14 @@ public class WinglessPiece {
 
     public boolean isSure() {
         return sure;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
     }
 
 }

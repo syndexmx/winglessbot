@@ -10,6 +10,23 @@ public class WinglessService {
 
     static Map<Integer, WinglessPiece> winglessBase = new TreeMap<>();
 
+
+    public static String getWinglessPieceByNumber(int number){
+        WinglessPiece currentPiece = winglessBase.get(number);
+        StringBuilder sb = new StringBuilder();
+        sb.append(currentPiece.getTask());
+        sb.append("\n");
+        sb.append(currentPiece.getSolution());
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    public static void registerASolution(int number, String answer){
+        WinglessPiece currentPiece = winglessBase.get(number);
+        currentPiece.setSolution(answer);
+        currentPiece.setSolved(true);
+    }
+
     public static int addNewPortion(String s){
         String ampersandSplit = StringUtils.replace(s, "\n\n","\n&");
         String[] splitS = split(ampersandSplit,"&");
@@ -62,6 +79,21 @@ public class WinglessService {
             }
         }
         sb.append("\n Итого нерешенных: "+ count+" \n");
+        return sb.toString();
+    }
+
+    public static String fetchSolutions(){
+        int count = 0;
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, WinglessPiece> winglessPieceEntry : winglessBase.entrySet()){
+            if (winglessPieceEntry.getValue().isSolved()) {
+                sb.append("#");
+                sb.append(winglessPieceEntry.getKey());
+                sb.append(". ");
+                sb.append(winglessPieceEntry.getValue().getSolution());
+                sb.append("\n");
+            }
+        }
         return sb.toString();
     }
 
