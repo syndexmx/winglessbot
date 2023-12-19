@@ -3,15 +3,20 @@ package services.servicestates;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 
+import static winglesspieces.WinglessService.fetchAllTasks;
+
 public class InstructionState  implements ServiceState {
 
     final String INSTRUCTION_TEXT = """
-            *Бекрылый* бот. Ассистент по бескрылкам\s
+            *Бескрылый* бот. Ассистент по бескрылкам\s
 
             _Возможные команды:_\s
-            * /about*    :о боте \s
-            * /help*     :помощь = список команд \s
-            * /add*      :добавить бескрылок \s
+            /about      :о боте \s
+            /help       :помощь = список команд \s
+            /all        :показать все задания в базе \s
+            /solved     :показать решенные \s
+            /unsolved   :показать нерешенные \s
+            /add        :добавить бескрылок \s
             """;
 
     @Override
