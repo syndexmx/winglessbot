@@ -7,6 +7,7 @@ public class IndividualService {
 
     private ServiceState state = new GeneralState();
 
+
     public void setState(ServiceState state) {
         this.state = state;
     }
@@ -15,6 +16,8 @@ public class IndividualService {
         setState(state.processRequest(tController, request, chatId));
 
     }
+
+
 
 
 

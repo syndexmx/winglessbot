@@ -10,13 +10,14 @@ public class InstructionState  implements ServiceState {
     final String INSTRUCTION_TEXT = """
             *Бескрылый* бот. Ассистент по бескрылкам\s
 
-            _Возможные команды:_\s
+            Возможные команды:\s
             /about      :о боте \s
             /help       :помощь = список команд \s
             /all        :показать все задания в базе \s
             /solved     :показать решенные \s
             /unsolved   :показать нерешенные \s
             /add        :добавить бескрылок \s
+            /checkout   :блок ответов \s
             """;
 
     @Override

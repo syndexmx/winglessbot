@@ -9,7 +9,7 @@ import static winglesspieces.WinglessService.fetchUnsolvedTasks;
 public class ShowUnsolvedState implements ServiceState {
 
     final String INTRO_TEXT = """
-            *Бескрылый* бот. Не решены:\s
+            Не решены:\s
 
             """;
 

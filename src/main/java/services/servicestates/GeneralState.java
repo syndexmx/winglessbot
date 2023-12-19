@@ -3,6 +3,7 @@ package services.servicestates;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 
+import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 
 public class GeneralState implements ServiceState {
@@ -17,9 +18,7 @@ public class GeneralState implements ServiceState {
                 return switchToState(tController, request, chatId);
             }
             case ('#') -> {
-                tController.sendMessage("Ввод ответа", chatId);
-                //TODO : Обработать полученный ответ
-                return this;
+                return switchToMonoState(tController, request, chatId);
             }
             default -> {
                 return this;
