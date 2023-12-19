@@ -14,7 +14,6 @@ public class TelegramBotController extends TelegramLongPollingBot {
     final String BOT_TOKEN;
 
 
-
     public TelegramBotController(String botName, String botToken) throws TelegramApiException {
         BOT_NAME = botToken;
         BOT_TOKEN = botToken;

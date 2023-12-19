@@ -4,6 +4,7 @@ import botcontroller.TelegramBotController;
 import services.ServiceState;
 import services.servicestates.AboutState;
 import services.servicestates.AddState;
+import services.servicestates.AdminsInstructionState;
 import services.servicestates.InstructionState;
 
 public class ServiceStateSwitcher {
@@ -19,6 +20,10 @@ public class ServiceStateSwitcher {
             }
             case ("/about") -> {
                 state = new AboutState();
+            }
+
+            case ("/adminshelp") -> {
+                state = new AdminsInstructionState();
             }
             default -> {
                 return new AboutState();
