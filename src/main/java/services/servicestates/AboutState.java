@@ -6,10 +6,10 @@ import services.ServiceState;
 public class AboutState implements ServiceState {
 
     final String PRESENTATION_TEXT = """
-            *Бекрылый* бот. Ассистент по бескрылкам\s
+            *Бескрылый* бот. Ассистент по бескрылкам\s
             \s
             _Чтобы узнать список команд введите:_\s
-            * /help*  \s
+            /help  \s
             """;
 
     final String TITLE_PICTURE = "https://artincontext.org/wp-content/uploads/2021/11/Nike-of-Samothrace.jpg";

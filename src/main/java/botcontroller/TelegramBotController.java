@@ -14,7 +14,6 @@ public class TelegramBotController extends TelegramLongPollingBot {
     final String BOT_TOKEN;
 
 
-
     public TelegramBotController(String botName, String botToken) throws TelegramApiException {
         BOT_NAME = botToken;
         BOT_TOKEN = botToken;
@@ -42,7 +41,7 @@ public class TelegramBotController extends TelegramLongPollingBot {
         SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
         message.setChatId(chatId);
         message.setText( m );
-        message.setParseMode("markdown");
+        // message.setParseMode("markdown");
 
         try {
             execute(message); // Call method to send the message
