@@ -3,6 +3,8 @@ package services.servicestates;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 
+import java.io.IOException;
+
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 import static winglesspieces.WinglessService.getWinglessPieceByNumber;
@@ -14,7 +16,7 @@ public class BringForwardState implements ServiceState {
 
     final String PROMPT_TEXT = "\n Введите ответ на бескрылку (или новую команду, начинающуюся с / или #):";
     @Override
-    public ServiceState processRequest(TelegramBotController tController, String input, long chatId) {
+    public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
         char ch = input.charAt(0);
         switch (ch) {
             case ('/') -> {
@@ -25,6 +27,7 @@ public class BringForwardState implements ServiceState {
             }
             default -> {
                 registerASolution(winglessPieceIndex, input);
+                System.out.println("###");
                 tController.sendMessage("Ответ на бескрылку #"+winglessPieceIndex+" принят", chatId);
                 return new GeneralState();
             }
@@ -35,7 +38,8 @@ public class BringForwardState implements ServiceState {
     public ServiceState onEnter(TelegramBotController tController, String input, long chatId) {
         int number = Integer.parseInt(input.substring(1));
         winglessPieceIndex = number;
-        String winglessPieceContent = "Бескрылка #"+ number + ":\n\n" + getWinglessPieceByNumber(number)+"\n";
+        String winglessPieceContent =
+                "Бескрылка #"+ number + ":\n\n" + getWinglessPieceByNumber(number)+"\n";
         tController.sendMessage(winglessPieceContent + PROMPT_TEXT, chatId);
         return this;
     }

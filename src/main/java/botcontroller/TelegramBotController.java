@@ -9,6 +9,8 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import services.IndividualService;
 import services.UserRepository;
 
+import java.io.IOException;
+
 public class TelegramBotController extends TelegramLongPollingBot {
     final String BOT_NAME;
     final String BOT_TOKEN;
@@ -22,7 +24,7 @@ public class TelegramBotController extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(Update update)  {
         if (update.hasMessage() && update.getMessage().hasText()){
             String userFullCommand = update.getMessage().getText().toLowerCase();
             long chatId = update.getMessage().getChatId();
@@ -30,7 +32,11 @@ public class TelegramBotController extends TelegramLongPollingBot {
             System.out.println("Request from #"+chatId+": "+userFullCommand);
 
             IndividualService iService = UserRepository.getIndividualService(chatId);
-            iService.parseCommand(this, userFullCommand, chatId);
+            try {
+                iService.parseCommand(this, userFullCommand, chatId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
         }
     }

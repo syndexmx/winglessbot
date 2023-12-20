@@ -16,7 +16,7 @@ public class CheckoutState  implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
-        tController.sendMessage(fetchSolutions(), chatId);
+        tController.sendMessage(fetchSolutions()+"\n", chatId);
         return new GeneralState();
     }
 }
