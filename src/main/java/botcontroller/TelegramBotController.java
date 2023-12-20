@@ -10,6 +10,7 @@ import services.IndividualService;
 import services.UserRepository;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import static botcontroller.TelegramBotMenu.prepareKeyboard;
 
@@ -31,7 +32,7 @@ public class TelegramBotController extends TelegramLongPollingBot {
             String userFullCommand = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
 
-            System.out.println("Request from #"+chatId+": "+userFullCommand);
+            System.out.println(LocalDateTime.now().toString() + " Request from #"+chatId+": "+userFullCommand);
 
             IndividualService iService = UserRepository.getIndividualService(chatId);
             try {
