@@ -70,6 +70,25 @@ public class WinglessService {
         pushUpdate();
     }
 
+    public static void withdrawSolution(int number) throws IOException {
+        WinglessPiece currentPiece = winglessBase.get(number);
+        currentPiece.setSolution("");
+        currentPiece.setSolved(false);
+        pushUpdate();
+    }
+
+    public static void makeSure(int number) throws IOException {
+        WinglessPiece currentPiece = winglessBase.get(number);
+        currentPiece.setSure(true);
+        pushUpdate();
+    }
+
+    public static void makeDoubtfull(int number) throws IOException {
+        WinglessPiece currentPiece = winglessBase.get(number);
+        currentPiece.setSure(false);
+        pushUpdate();
+    }
+
     public static int addNewPortion(String s) throws IOException {
         String ampersandSplit = StringUtils.replace(s, "\n\n","\n&");
         String[] splitS = split(ampersandSplit,"&");
@@ -104,7 +123,7 @@ public class WinglessService {
                 count++;
                 sb.append(winglessPiece.getComplete() + "\n");
                 if (!winglessPiece.isSure()){
-                    sb.append("\n ? ? ? \n");
+                    sb.append("? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
                 }
                 sb.append("\n");
             }
