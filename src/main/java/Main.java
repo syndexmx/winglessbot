@@ -15,6 +15,7 @@ public class Main {
             }
             new TelegramBotController(args[0], args[1]);
             pullUpdate();
+            System.out.println("The bot is supposed to be on-line now ...");
 
     }
 }

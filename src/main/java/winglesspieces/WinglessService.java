@@ -166,18 +166,18 @@ public class WinglessService {
         int count = 0;
         for ( Integer index  : winglessBase.keySet()){
             String buttonMarkup = "#"+index+" ";
-            if (winglessBase.get(index).isSolved()){
-                if (winglessBase.get(index).isSure()){
-                    buttonMarkup = buttonMarkup +".";
-                } else {
-                    buttonMarkup = buttonMarkup +"?";
-                }
-            } else {
-                buttonMarkup = buttonMarkup +"!";
-            }
+//            if (winglessBase.get(index).isSolved()){
+//                if (winglessBase.get(index).isSure()){
+//                    buttonMarkup = buttonMarkup +"+";
+//                } else {
+//                    buttonMarkup = buttonMarkup +"?";
+//                }
+//            } else {
+//                buttonMarkup = buttonMarkup +"-";
+//            }
             innerList.add(buttonMarkup);
             count ++;
-            if (count % 10 == 0){
+            if (count % 10  == 0){
                 outerList.add(innerList);
                 innerList =  new ArrayList<>();
             }
