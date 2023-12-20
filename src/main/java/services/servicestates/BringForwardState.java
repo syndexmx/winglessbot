@@ -46,7 +46,6 @@ public class BringForwardState implements ServiceState {
             }
             default -> {
                 registerASolution(winglessPieceIndex, input);
-                System.out.println("###");
                 tController.sendMessage("Ответ на бескрылку #"+winglessPieceIndex+" принят", chatId);
                 return new GeneralState();
             }
