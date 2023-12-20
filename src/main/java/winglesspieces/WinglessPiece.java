@@ -13,6 +13,8 @@ public class WinglessPiece implements Serializable {
 
     private boolean solved=false;
 
+
+
     private boolean sure=true;
 
 
@@ -45,12 +47,16 @@ public class WinglessPiece implements Serializable {
         this.solution = solution;
         String primary =  this.task;
         String prefix = primary.substring(0, primary.indexOf("[")+1);
-        String suffix = primary.substring(primary.indexOf("]")+1);
+        String suffix = primary.substring(primary.indexOf("]"));
         this.complete = prefix + solution + suffix;
     }
 
     public void setSolved(boolean solved) {
         this.solved = solved;
+    }
+
+    public void setSure(boolean sure) {
+        this.sure = sure;
     }
 
 }

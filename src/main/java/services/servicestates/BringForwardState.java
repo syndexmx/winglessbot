@@ -7,14 +7,18 @@ import java.io.IOException;
 
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
-import static winglesspieces.WinglessService.getWinglessPieceByNumber;
-import static winglesspieces.WinglessService.registerASolution;
+import static winglesspieces.WinglessService.*;
 
 public class BringForwardState implements ServiceState {
 
     private int winglessPieceIndex;
 
-    final String PROMPT_TEXT = "\n Введите ответ на бескрылку (или новую команду, начинающуюся с / или #):";
+    final String PROMPT_TEXT = """
+            Введите ответ на бескрылку (или новую команду, начинающуюся с / или # ,
+            либо модерация бескрылки:  & -отозвать ответ, ? -пометить сомнительным, ! -подтвердить )
+            \s
+            \s Ответ:
+            """;
     @Override
     public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
         char ch = input.charAt(0);
@@ -24,6 +28,21 @@ public class BringForwardState implements ServiceState {
             }
             case ('#') -> {
                 return switchToMonoState(tController, input, chatId);
+            }
+            case ('&') -> {
+                withdrawSolution(winglessPieceIndex);
+                tController.sendMessage("Ответ отозван", chatId);
+                return new GeneralState();
+            }
+            case ('?') -> {
+                makeDoubtfull(winglessPieceIndex);
+                tController.sendMessage("Ответ помечен сомнительным", chatId);
+                return new GeneralState();
+            }
+            case ('!') -> {
+                makeSure(winglessPieceIndex);
+                tController.sendMessage("Ответ помечен как верный", chatId);
+                return new GeneralState();
             }
             default -> {
                 registerASolution(winglessPieceIndex, input);
