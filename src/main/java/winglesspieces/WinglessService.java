@@ -109,7 +109,7 @@ public class WinglessService {
     public static String fetchAllTasks(){
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
-            sb.append( winglessPiece.getTask()+"\n");
+            sb.append( winglessPiece.getComplete()+"\n\n");
         }
         sb.append("\n Всего: "+ winglessBase.size()+" \n");
         return sb.toString();
@@ -125,7 +125,7 @@ public class WinglessService {
                 if (!winglessPiece.isSure()){
                     sb.append("? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
                 }
-                sb.append("\n");
+                sb.append("\n\n");
             }
         }
         sb.append("\n Итого решено: "+ count +" \n");
@@ -137,7 +137,7 @@ public class WinglessService {
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
             if (!winglessPiece.isSolved()) {
-                sb.append(winglessPiece.getTask() + "\n");
+                sb.append(winglessPiece.getTask() + "\n\n");
                 count++;
             }
         }
@@ -158,6 +158,35 @@ public class WinglessService {
             }
         }
         return sb.toString();
+    }
+
+    public static List<List<String>> collectDoubleList(){
+        List<List<String>> outerList = new ArrayList<>();
+        List<String> innerList = new ArrayList<>();
+        int count = 0;
+        for ( Integer index  : winglessBase.keySet()){
+            String buttonMarkup = "#"+index+" ";
+            if (winglessBase.get(index).isSolved()){
+                if (winglessBase.get(index).isSure()){
+                    buttonMarkup = buttonMarkup +".";
+                } else {
+                    buttonMarkup = buttonMarkup +"?";
+                }
+            } else {
+                buttonMarkup = buttonMarkup +"!";
+            }
+            innerList.add(buttonMarkup);
+            count ++;
+            if (count % 10 == 0){
+                outerList.add(innerList);
+                innerList =  new ArrayList<>();
+            }
+
+        }
+        if (count % 10 != 0){
+            outerList.add(innerList);
+        }
+        return outerList;
     }
 
 }

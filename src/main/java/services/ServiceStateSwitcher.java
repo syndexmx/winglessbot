@@ -8,12 +8,26 @@ public class ServiceStateSwitcher {
 
     public static ServiceState switchToState(TelegramBotController tController, String s, long chatId){
         ServiceState state;
-        switch (s){
+        String[] instructions = s.split("\n")[0].split(" ");
+        String instruction = instructions[0];
+        switch (instruction){
+            case ("/start") -> {
+                state = new AboutState();
+            }
+            case ("/a") -> {
+                state = new ShowAllState();
+            }
             case ("/all") -> {
                 state = new ShowAllState();
             }
+            case ("/s") -> {
+                state = new ShowSolvedState();
+            }
             case ("/solved") -> {
                 state = new ShowSolvedState();
+            }
+            case ("/u") -> {
+                state = new ShowUnsolvedState();
             }
             case ("/unsolved") -> {
                 state = new ShowUnsolvedState();
@@ -26,6 +40,9 @@ public class ServiceStateSwitcher {
             }
             case ("/about") -> {
                 state = new AboutState();
+            }
+            case ("/c") -> {
+                state = new CheckoutState();
             }
             case ("/checkout") -> {
                 state = new CheckoutState();
@@ -43,14 +60,10 @@ public class ServiceStateSwitcher {
 
     public static ServiceState switchToMonoState(TelegramBotController tController, String s, long chatId) {
         ServiceState state;
-
-        if (s.length()<5) {
-                state = new BringForwardState();
-            } else {
-                state = new BringForwardState();
-            }
-
-        state = state.onEnter(tController, s, chatId);
+        String numberString = s.split("\n")[0]
+                .split(" ")[0];
+        state = new BringForwardState();
+        state = state.onEnter(tController, numberString, chatId);
         return state;
     }
 
