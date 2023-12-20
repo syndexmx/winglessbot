@@ -2,32 +2,75 @@ package winglesspieces;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.*;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.apache.commons.lang3.StringUtils.split;
 
 public class WinglessService {
 
     static Map<Integer, WinglessPiece> winglessBase = new TreeMap<>();
+    static ReentrantLock winglessBaseLock = new ReentrantLock();
+
+    private static void pushUpdate() throws IOException {
+        winglessBaseLock.lock();
+        {
+            // Push data to file
+            try (
+                FileOutputStream fOS = new FileOutputStream("winglesspiecesbase.dat");
+                ObjectOutputStream oOS = new ObjectOutputStream(fOS);
+            ) {
+                oOS.writeObject(winglessBase);
+
+                oOS.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        winglessBaseLock.unlock();
+    }
+
+    public static void pullUpdate() throws IOException {
+        winglessBaseLock.lock();
+        {
+            try (
+                    FileInputStream fIS = new FileInputStream("winglesspiecesbase.dat");
+                    ObjectInputStream oIS = new ObjectInputStream(fIS);
+            ) {
+                winglessBase.clear();
+                winglessBase = (Map) oIS.readObject();
+                oIS.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        winglessBaseLock.unlock();
+    }
 
 
     public static String getWinglessPieceByNumber(int number){
         WinglessPiece currentPiece = winglessBase.get(number);
         StringBuilder sb = new StringBuilder();
-        sb.append(currentPiece.getTask());
+        sb.append(currentPiece.getComplete());
         sb.append("\n");
         sb.append(currentPiece.getSolution());
         sb.append("\n");
         return sb.toString();
     }
 
-    public static void registerASolution(int number, String answer){
+    public static void registerASolution(int number, String answer) throws IOException {
         WinglessPiece currentPiece = winglessBase.get(number);
         currentPiece.setSolution(answer);
         currentPiece.setSolved(true);
+        pushUpdate();
     }
 
-    public static int addNewPortion(String s){
+    public static int addNewPortion(String s) throws IOException {
         String ampersandSplit = StringUtils.replace(s, "\n\n","\n&");
         String[] splitS = split(ampersandSplit,"&");
         int addedCount = 0;
@@ -39,8 +82,10 @@ public class WinglessService {
                 addedCount++;
             }
         }
+        pushUpdate();
         return addedCount;
     }
+
 
     public static String fetchAllTasks(){
         StringBuilder sb = new StringBuilder();
@@ -57,12 +102,11 @@ public class WinglessService {
         for (WinglessPiece winglessPiece : winglessBase.values()){
             if (winglessPiece.isSolved()) {
                 count++;
-                sb.append(winglessPiece.getTask() + "\n\n");
-                sb.append("# "+winglessPiece.getSolution());
+                sb.append(winglessPiece.getComplete() + "\n");
                 if (!winglessPiece.isSure()){
-                    sb.append("\n ? ? ?");
+                    sb.append("\n ? ? ? \n");
                 }
-                sb.append("\n\n");
+                sb.append("\n");
             }
         }
         sb.append("\n Итого решено: "+ count +" \n");
