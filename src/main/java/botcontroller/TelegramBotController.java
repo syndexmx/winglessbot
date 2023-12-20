@@ -11,6 +11,8 @@ import services.UserRepository;
 
 import java.io.IOException;
 
+import static botcontroller.TelegramBotMenu.prepareKeyboard;
+
 public class TelegramBotController extends TelegramLongPollingBot {
     final String BOT_NAME;
     final String BOT_TOKEN;
@@ -47,6 +49,7 @@ public class TelegramBotController extends TelegramLongPollingBot {
         SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
         message.setChatId(chatId);
         message.setText( m );
+        message.setReplyMarkup(prepareKeyboard());
         // message.setParseMode("markdown");
 
         try {
