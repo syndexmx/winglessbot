@@ -1,20 +1,25 @@
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import botcontroller.TelegramBotController;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 import static winglesspieces.WinglessService.pullUpdate;
+import javax.swing.JOptionPane;
 
 public class Main {
     public static void main(String[] args) throws IOException, TelegramApiException {
-
-            if (args.length==0) {
-                System.out.print("*** This Telegram bot need two parameters: ***");
-                System.out.print("TELEGRAM_BOT_NAME TELEGRAM_BOT_TOKEN");
-                System.out.print("they can ne acquired from @BotFather");
+        String telegramBotsName;
+        String telegramBotsToken;
+        if (args.length==0) {
+                telegramBotsName = JOptionPane.showInputDialog("Enter bot's name");
+                telegramBotsToken = JOptionPane.showInputDialog("Enter bot's token");
+            } else {
+                telegramBotsName = args[0];
+                telegramBotsToken = args[1];
             }
-            new TelegramBotController(args[0], args[1]);
+            new TelegramBotController(telegramBotsName, telegramBotsToken);
             pullUpdate();
             System.out.println(LocalDateTime.now().toString() + "The bot is supposed to be on-line now ...");
 
