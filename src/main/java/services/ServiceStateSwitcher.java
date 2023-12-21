@@ -50,6 +50,10 @@ public class ServiceStateSwitcher {
             case ("/adminshelp") -> {
                 state = new AdminsInstructionState();
             }
+            case ("/takeoffline") -> {
+                state = new AboutState();
+                System.exit(130);
+            }
             default -> {
                 return new AboutState();
             }

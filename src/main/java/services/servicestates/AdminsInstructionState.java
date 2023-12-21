@@ -9,7 +9,7 @@ public class AdminsInstructionState implements ServiceState {
             *Бекрылый* бот. Администраторская помощь\s
             \s
             _Администраторские команды:_\s
-            * /nop*      :пустая команда \s
+            * /takeoffline *      :выключить \s
             """;
 
     @Override
