@@ -18,6 +18,8 @@ public class InstructionState  implements ServiceState {
             /unsolved   :показать нерешенные \s
             /add        :добавить бескрылок \s
             /checkout   :блок ответов \s
+            #1          :вывести бескрылку №1 \s
+                после вывода бескрылки вводится ответ или новая команда \s 
             """;
 
     @Override
