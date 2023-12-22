@@ -10,6 +10,8 @@ public class AdminsInstructionState implements ServiceState {
             \s
             _Администраторские команды:_\s
             * /takeoffline *      :выключить \s
+            * /latest *             :последнее действие \s
+            * /last *             :последнее действие \s
             """;
 
     @Override

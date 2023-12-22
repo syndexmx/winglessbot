@@ -1,6 +1,7 @@
 package winglesspieces;
 
 import org.apache.commons.lang3.StringUtils;
+import services.CollectiveNotifier;
 
 import java.io.*;
 import java.util.*;
@@ -12,7 +13,6 @@ public class WinglessService {
 
     static Map<Integer, WinglessPiece> winglessBase = new TreeMap<>();
     static ReentrantLock winglessBaseLock = new ReentrantLock();
-
     static String winglessPiecesBaseDat = "winglesspiecesbase.dat";
 
     private static void pushUpdate() throws IOException {
@@ -70,6 +70,9 @@ public class WinglessService {
         currentPiece.setSolution(answer);
         currentPiece.setSolved(true);
         pushUpdate();
+        CollectiveNotifier
+                .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
+                        + currentPiece.getComplete() + " \n\n *** решена ***");
     }
 
     public static void withdrawSolution(int number) throws IOException {
@@ -77,18 +80,27 @@ public class WinglessService {
         currentPiece.setSolution("");
         currentPiece.setSolved(false);
         pushUpdate();
+        CollectiveNotifier
+                .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
+                        + currentPiece.getComplete() + " \n\n *** Решение отозвано ***");
     }
 
     public static void makeSure(int number) throws IOException {
         WinglessPiece currentPiece = winglessBase.get(number);
         currentPiece.setSure(true);
         pushUpdate();
+        CollectiveNotifier
+                .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
+                        + currentPiece.getComplete() + " \n\n *** ответ утвержден ***");
     }
 
     public static void makeDoubtfull(int number) throws IOException {
         WinglessPiece currentPiece = winglessBase.get(number);
         currentPiece.setSure(false);
         pushUpdate();
+        CollectiveNotifier
+                .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
+                        + currentPiece.getComplete() + " \n\n *** ответ помечен как сомнительный ***");
     }
 
     public static int addNewPortion(String s) throws IOException {
@@ -168,15 +180,6 @@ public class WinglessService {
         int count = 0;
         for ( Integer index  : winglessBase.keySet()){
             String buttonMarkup = "#"+index+" ";
-//            if (winglessBase.get(index).isSolved()){
-//                if (winglessBase.get(index).isSure()){
-//                    buttonMarkup = buttonMarkup +"+";
-//                } else {
-//                    buttonMarkup = buttonMarkup +"?";
-//                }
-//            } else {
-//                buttonMarkup = buttonMarkup +"-";
-//            }
             innerList.add(buttonMarkup);
             count ++;
             if (count % 10  == 0){

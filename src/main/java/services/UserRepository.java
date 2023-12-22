@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,10 @@ public class UserRepository {
             return iService;
         }
 
+    }
+
+    public static Collection<Long> getAllActivatedUsers(){
+        return usersRepository.keySet();
     }
 
 }
