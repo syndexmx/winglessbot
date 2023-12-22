@@ -59,4 +59,6 @@ public class WinglessPiece implements Serializable {
         this.sure = sure;
     }
 
+
+
 }

@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import static botcontroller.BotLogger.botLog;
 import static winglesspieces.WinglessService.pullUpdate;
 import static winglesspieces.WinglessService.setWinglessPiecesBaseDat;
 
@@ -39,7 +40,8 @@ public class Main {
             }
             new TelegramBotController(telegramBotsName, telegramBotsToken);
             pullUpdate();
-            System.out.println(LocalDateTime.now().toString() + "The bot is supposed to be on-line now ...");
+            System.out.println(LocalDateTime.now().toString() + " The bot is supposed to be on-line now ...");
+            botLog( "The bot is supposed to be on-line now ...");
 
     }
 }

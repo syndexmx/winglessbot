@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import services.CollectiveNotifier;
 import services.IndividualService;
 import services.UserRepository;
 
@@ -24,6 +25,7 @@ public class TelegramBotController extends TelegramLongPollingBot {
         BOT_TOKEN = botToken;
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
         botsApi.registerBot(this);
+        CollectiveNotifier.settController(this);
     }
 
     @Override
@@ -31,12 +33,10 @@ public class TelegramBotController extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()){
             String userFullCommand = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
-
-            System.out.println(LocalDateTime.now().toString() + " Request from #"+chatId+": "+userFullCommand);
-
             IndividualService iService = UserRepository.getIndividualService(chatId);
             try {
                 iService.parseCommand(this, userFullCommand, chatId);
+                BotLogger.botLog( " Request from #"+chatId+": "+userFullCommand);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

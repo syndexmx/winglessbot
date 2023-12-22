@@ -51,8 +51,13 @@ public class ServiceStateSwitcher {
                 state = new AdminsInstructionState();
             }
             case ("/takeoffline") -> {
-                state = new AboutState();
-                System.exit(130);
+                state = new TakeOffLineState();
+            }
+            case ("/last") -> {
+                state = new LastActionState();
+            }
+            case ("/latest") -> {
+                state = new LastActionsState();
             }
             default -> {
                 return new AboutState();
