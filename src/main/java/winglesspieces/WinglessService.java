@@ -13,6 +13,8 @@ public class WinglessService {
     static Map<Integer, WinglessPiece> winglessBase = new TreeMap<>();
     static ReentrantLock winglessBaseLock = new ReentrantLock();
 
+    static String winglessPiecesBaseDat = "winglesspiecesbase.dat";
+
     private static void pushUpdate() throws IOException {
         winglessBaseLock.lock();
         {
@@ -36,7 +38,7 @@ public class WinglessService {
         winglessBaseLock.lock();
         {
             try (
-                    FileInputStream fIS = new FileInputStream("winglesspiecesbase.dat");
+                    FileInputStream fIS = new FileInputStream(winglessPiecesBaseDat);
                     ObjectInputStream oIS = new ObjectInputStream(fIS);
             ) {
                 winglessBase.clear();
@@ -187,6 +189,10 @@ public class WinglessService {
             outerList.add(innerList);
         }
         return outerList;
+    }
+
+    public static void setWinglessPiecesBaseDat(String winglessPiecesBaseDat) {
+        WinglessService.winglessPiecesBaseDat = winglessPiecesBaseDat;
     }
 
 }
