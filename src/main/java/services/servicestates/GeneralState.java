@@ -2,7 +2,9 @@ package services.servicestates;
 
 import botcontroller.TelegramBotController;
 import services.ServiceState;
+import services.UserRepository;
 
+import static services.CollectiveNotifier.notyfyAllUsers;
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 
@@ -21,7 +23,8 @@ public class GeneralState implements ServiceState {
                 return switchToMonoState(tController, request, chatId);
             }
             default -> {
-                return this;
+                notyfyAllUsers(UserRepository.getAlias(chatId) +":\n"+ request);
+                return new GeneralState();
             }
         }
         //return this;
