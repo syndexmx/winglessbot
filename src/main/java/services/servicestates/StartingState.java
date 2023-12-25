@@ -12,7 +12,6 @@ import static winglesspieces.WinglessService.*;
 
 public class StartingState implements ServiceState {
 
-
     final String PROMPT_TEXT = "Представьтесь, пожалуйста, для удобства: ";
 
     @Override
@@ -28,7 +27,7 @@ public class StartingState implements ServiceState {
             default -> {
                 setAlias(chatId, input);
                 tController.sendMessage("Доброго дня, "+input, chatId);
-                return new GeneralState();
+                return switchToState(tController, "/general", chatId);
             }
         }
     }

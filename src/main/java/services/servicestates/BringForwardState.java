@@ -62,7 +62,7 @@ public class BringForwardState implements ServiceState {
         winglessPieceIndex = number;
         String winglessPieceContent =
                 "Бескрылка #"+ number + ":\n\n" + getWinglessPieceByNumber(number)+"\n";
-        tController.sendMessage(winglessPieceContent + PROMPT_TEXT, chatId);
+        tController.sendMessage( PROMPT_TEXT + winglessPieceContent , chatId);
         return this;
     }
 }
