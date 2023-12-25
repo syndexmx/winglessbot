@@ -10,7 +10,7 @@ public class BotLogger {
 
     static Deque<String> logQue = new LinkedList<>();
 
-    static int LOG_LINE_LENGTH = 20;
+    static int LOG_LINE_LENGTH = 30;
 
     public static void botLog(String text){
         String timeStamp = LocalDateTime.now().toString();

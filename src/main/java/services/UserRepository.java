@@ -19,6 +19,16 @@ public class UserRepository {
 
     }
 
+    public static void setAlias(long chatId, String alias){
+        IndividualService iService = usersRepository.get(chatId);
+        iService.setAlias(alias);
+    }
+
+    public static String getAlias(long chatId){
+        IndividualService iService = usersRepository.get(chatId);
+        return iService.getAlias();
+    }
+
     public static Collection<Long> getAllActivatedUsers(){
         return usersRepository.keySet();
     }

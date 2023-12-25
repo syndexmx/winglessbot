@@ -9,6 +9,16 @@ public class IndividualService {
 
     private ServiceState state = new GeneralState();
 
+    private String alias = "Anonymous";
+
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
 
     public void setState(ServiceState state) {
         this.state = state;
