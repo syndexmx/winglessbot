@@ -9,18 +9,21 @@ import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 import static winglesspieces.WinglessService.*;
 
-public class BringForwardState implements ServiceState {
+public class AnswerState implements ServiceState {
 
     private int winglessPieceIndex;
 
     final String PROMPT_TEXT = """
-            Модерация бескрылки:  \s
-            . -ввести ответ на бескрылку (команда 'точка'),\s
-            & -отозвать ответ,\s
-            ? -пометить сомнительным,\s
-            ! -подтвердить \s
+            Введите ОТВЕТ на бескрылку (или новую команду, начинающуюся с / или # ,
+            либо модерация бескрылки:  & -отозвать ответ, ? -пометить сомнительным, ! -подтвердить )
             \s
+            \s Ответ:
             """;
+
+    public AnswerState(int winglessPieceIndex) {
+        this.winglessPieceIndex = winglessPieceIndex;
+    }
+
     @Override
     public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
         char ch = input.charAt(0);
@@ -45,10 +48,6 @@ public class BringForwardState implements ServiceState {
                 makeSure(winglessPieceIndex);
                 tController.sendMessage("Ответ помечен как верный", chatId);
                 return new GeneralState();
-            }
-            case ('.') -> {
-                tController.sendMessage("Введите Ответ на бескрылку (или новую команду, начинающуюся с / или #):", chatId);
-                return new AnswerState(winglessPieceIndex);
             }
             default -> {
                 registerASolution(winglessPieceIndex, input);
