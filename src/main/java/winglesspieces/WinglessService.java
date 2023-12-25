@@ -65,14 +65,14 @@ public class WinglessService {
         return sb.toString();
     }
 
-    public static void registerASolution(int number, String answer) throws IOException {
+    public static void registerASolution(int number, String answer, String actor) throws IOException {
         WinglessPiece currentPiece = winglessBase.get(number);
         currentPiece.setSolution(answer);
         currentPiece.setSolved(true);
         pushUpdate();
         CollectiveNotifier
                 .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
-                        + currentPiece.getComplete() + " \n\n *** решена ***");
+                        + currentPiece.getComplete() + " \n\n *** решена ***\n" + actor );
     }
 
     public static void withdrawSolution(int number) throws IOException {

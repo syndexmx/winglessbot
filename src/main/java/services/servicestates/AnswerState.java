@@ -2,6 +2,7 @@ package services.servicestates;
 
 import botcontroller.TelegramBotController;
 import services.ServiceState;
+import services.UserRepository;
 
 import java.io.IOException;
 
@@ -50,7 +51,7 @@ public class AnswerState implements ServiceState {
                 return new GeneralState();
             }
             default -> {
-                registerASolution(winglessPieceIndex, input);
+                registerASolution(winglessPieceIndex, input, UserRepository.getAlias(chatId));
                 tController.sendMessage("Ответ на бескрылку #"+winglessPieceIndex+" принят", chatId);
                 return new GeneralState();
             }

@@ -12,7 +12,7 @@ public class ServiceStateSwitcher {
         String instruction = instructions[0];
         switch (instruction){
             case ("/start") -> {
-                state = new AboutState();
+                state = new StartingState();
             }
             case ("/a") -> {
                 state = new ShowAllState();
@@ -73,6 +73,13 @@ public class ServiceStateSwitcher {
                 .split(" ")[0];
         state = new BringForwardState();
         state = state.onEnter(tController, numberString, chatId);
+        return state;
+    }
+
+    public static ServiceState switchToPresentation(TelegramBotController tController, String s, long chatId) {
+        ServiceState state;
+        state = new StartingState();
+        state = state.onEnter(tController, "", chatId);
         return state;
     }
 
