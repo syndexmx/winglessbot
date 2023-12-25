@@ -43,6 +43,9 @@ public class ServiceStateSwitcher {
             case ("/about") -> {
                 state = new AboutState();
             }
+            case ("/general") -> {
+                state = new GeneralState();
+            }
             case ("/c") -> {
                 state = new CheckoutState();
             }
