@@ -4,6 +4,8 @@ import botcontroller.TelegramBotController;
 import services.ServiceState;
 import services.servicestates.*;
 
+import static services.CollectiveNotifier.notyfyAllUsers;
+
 public class ServiceStateSwitcher {
 
     public static ServiceState switchToState(TelegramBotController tController, String s, long chatId){
@@ -60,7 +62,8 @@ public class ServiceStateSwitcher {
                 state = new LastActionsState();
             }
             default -> {
-                return new AboutState();
+                notyfyAllUsers(UserRepository.getAlias(chatId) +":\n"+ s);
+                return new GeneralState();
             }
         }
         state = state.onEnter(tController, s, chatId);
