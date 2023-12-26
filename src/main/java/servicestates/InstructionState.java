@@ -1,20 +1,18 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.MainMenu;
+import botmenus.MainMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 
 import static services.UserRepository.setMenu;
 
-public class AdminsInstructionState implements ServiceState {
+public class InstructionState  implements ServiceState {
 
     final String INSTRUCTION_TEXT = """
-            *Бекрылый* бот. Администраторская помощь\s
-            \s
-            _Администраторские команды:_\s
-            * /takeoffline *      :выключить \s
-            * /latest *             :последнее действие \s
-            * /last *             :последнее действие \s
+            *Бескрылый* бот. Ассистент по бескрылкам\s
+
+            Возможные команды:\s
+            Для управления используйте вкнопки меню внизу
+            Или отправьте сообщение всем пользователям бота \s
             """;
 
     @Override

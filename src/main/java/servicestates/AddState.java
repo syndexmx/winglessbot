@@ -1,8 +1,7 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.MainMenu;
+import botmenus.MainMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 import winglesspieces.WinglessService;
 
 import java.io.IOException;

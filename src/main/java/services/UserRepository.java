@@ -1,6 +1,6 @@
 package services;
 
-import botcontroller.Menu;
+import botmenus.Menu;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package botcontroller;
+package botmenus;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -6,12 +6,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import java.util.ArrayList;
 import java.util.List;
 
-import static winglesspieces.WinglessService.collectSolvedList;
+import static winglesspieces.WinglessService.collectDoubtfulList;
 
-public class SolvedMenu implements Menu {
+public class DoubtfulMenu implements Menu {
 
-    public ReplyKeyboardMarkup prepareKeyboard() {
-        List<List<String>> doubleListOfMenuItems = collectSolvedList();
+    public ReplyKeyboardMarkup prepareKeyboard(){
+        List<List<String>> doubleListOfMenuItems = collectDoubtfulList();
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setSelective(true);
         keyboardMarkup.setResizeKeyboard(true);

@@ -1,32 +1,30 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.MainMenu;
+import botmenus.BringForwardMenu;
+import botmenus.MainMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 import services.UserRepository;
 
 import java.io.IOException;
 
+import static services.CollectiveNotifier.notyfyAllUsers;
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 import static services.UserRepository.setMenu;
 import static winglesspieces.WinglessService.*;
 
-public class Answer2State implements ServiceState {
+public class BringForwardState implements ServiceState {
 
     private int winglessPieceIndex;
 
     final String PROMPT_TEXT = """
-            Введите ОТВЕТ на бескрылку или новую команду,\s
-            модерация:  & -отозвать ответ, ? -пометить сомнительным, ! -подтвердить)
+            Модерация бескрылки:  \s
+            . -ввести ответ на бескрылку (команда 'точка'),\s
+            & -отозвать ответ,\s
+            ? -пометить сомнительным,\s
+            ! -подтвердить \s
             \s
-            \s Ответ:
             """;
-
-    public Answer2State(int winglessPieceIndex) {
-        this.winglessPieceIndex = winglessPieceIndex;
-    }
-
     @Override
     public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
         char ch = input.charAt(0);
@@ -39,8 +37,8 @@ public class Answer2State implements ServiceState {
             }
             case ('&') -> {
                 withdrawSolution(winglessPieceIndex);
-                setMenu(chatId, new MainMenu());
                 tController.sendMessage("Ответ отозван", chatId);
+                setMenu(chatId, new MainMenu());
                 return new GeneralState();
             }
             case ('?') -> {
@@ -55,10 +53,17 @@ public class Answer2State implements ServiceState {
                 tController.sendMessage("Ответ помечен как верный", chatId);
                 return new GeneralState();
             }
+            case ('.') -> {
+                tController.sendMessage("Введите Ответ на бескрылку (или выберите новую команду):", chatId);
+                return new AnswerState(winglessPieceIndex);
+            }
+            case (':') -> {
+                tController.sendMessage("Введите Ответ - второе крыло бескрылки", chatId);
+                return new Answer2State(winglessPieceIndex);
+            }
             default -> {
-                registerASecondSolution(winglessPieceIndex, input, UserRepository.getAlias(chatId));
                 setMenu(chatId, new MainMenu());
-                tController.sendMessage("Ответ на бескрылку #"+winglessPieceIndex+" принят", chatId);
+                notyfyAllUsers(UserRepository.getAlias(chatId) +":\n"+ input);
                 return new GeneralState();
             }
         }
@@ -70,7 +75,8 @@ public class Answer2State implements ServiceState {
         winglessPieceIndex = number;
         String winglessPieceContent =
                 "Бескрылка #"+ number + ":\n\n" + getWinglessPieceByNumber(number)+"\n";
-        tController.sendMessage(winglessPieceContent + PROMPT_TEXT, chatId);
+        setMenu(chatId, new BringForwardMenu());
+        tController.sendMessage( winglessPieceContent , chatId);
         return this;
     }
 }

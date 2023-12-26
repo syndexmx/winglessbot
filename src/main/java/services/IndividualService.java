@@ -1,9 +1,10 @@
 package services;
 
-import botcontroller.MainMenu;
-import botcontroller.Menu;
+import botmenus.MainMenu;
+import botmenus.Menu;
 import botcontroller.TelegramBotController;
-import services.servicestates.GeneralState;
+import servicestates.GeneralState;
+import servicestates.ServiceState;
 
 import java.io.IOException;
 

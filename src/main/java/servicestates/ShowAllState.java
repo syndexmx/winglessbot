@@ -1,17 +1,15 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.DoubtfulMenu;
+import botmenus.MainMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 
 import static services.UserRepository.setMenu;
-import static winglesspieces.WinglessService.fetchDoubtful;
-import static winglesspieces.WinglessService.fetchSolvedTasks;
+import static winglesspieces.WinglessService.fetchAllTasks;
 
-public class ShowDoubtfulState implements ServiceState {
+public class ShowAllState implements ServiceState {
 
     final String INTRO_TEXT = """
-            Под сомнением:\s
+            Все задания Тура.\s
 
             """;
 
@@ -23,8 +21,8 @@ public class ShowDoubtfulState implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
-        setMenu(chatId, new DoubtfulMenu());
-        tController.sendMessage(INTRO_TEXT + fetchDoubtful(), chatId);
+        setMenu(chatId, new MainMenu());
+        tController.sendMessage(INTRO_TEXT+fetchAllTasks(), chatId);
         return new GeneralState();
     }
 }

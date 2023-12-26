@@ -1,8 +1,7 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.SolvedMenu;
+import botmenus.SolvedMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 import services.UserRepository;
 
 import static services.CollectiveNotifier.notyfyAllUsers;
