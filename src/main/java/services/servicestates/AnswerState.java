@@ -1,5 +1,6 @@
 package services.servicestates;
 
+import botcontroller.MainMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 import services.UserRepository;
@@ -8,6 +9,7 @@ import java.io.IOException;
 
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
+import static services.UserRepository.setMenu;
 import static winglesspieces.WinglessService.*;
 
 public class AnswerState implements ServiceState {
@@ -37,21 +39,25 @@ public class AnswerState implements ServiceState {
             }
             case ('&') -> {
                 withdrawSolution(winglessPieceIndex);
+                setMenu(chatId, new MainMenu());
                 tController.sendMessage("Ответ отозван", chatId);
                 return new GeneralState();
             }
             case ('?') -> {
                 makeDoubtfull(winglessPieceIndex);
+                setMenu(chatId, new MainMenu());
                 tController.sendMessage("Ответ помечен сомнительным", chatId);
                 return new GeneralState();
             }
             case ('!') -> {
                 makeSure(winglessPieceIndex);
+                setMenu(chatId, new MainMenu());
                 tController.sendMessage("Ответ помечен как верный", chatId);
                 return new GeneralState();
             }
             default -> {
                 registerASolution(winglessPieceIndex, input, UserRepository.getAlias(chatId));
+                setMenu(chatId, new MainMenu());
                 tController.sendMessage("Ответ на бескрылку #"+winglessPieceIndex+" принят", chatId);
                 return new GeneralState();
             }

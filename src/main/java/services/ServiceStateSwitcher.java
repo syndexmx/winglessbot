@@ -1,7 +1,6 @@
 package services;
 
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 import services.servicestates.*;
 
 import static services.CollectiveNotifier.notyfyAllUsers;
@@ -48,6 +47,9 @@ public class ServiceStateSwitcher {
             }
             case ("/c") -> {
                 state = new CheckoutState();
+            }
+            case ("/d") -> {
+                state = new ShowDoubtfulState();
             }
             case ("/checkout") -> {
                 state = new CheckoutState();

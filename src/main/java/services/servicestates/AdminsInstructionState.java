@@ -1,7 +1,10 @@
 package services.servicestates;
 
+import botcontroller.MainMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
+
+import static services.UserRepository.setMenu;
 
 public class AdminsInstructionState implements ServiceState {
 
@@ -22,6 +25,7 @@ public class AdminsInstructionState implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
+        setMenu(chatId, new MainMenu());
         tController.sendMessage(INSTRUCTION_TEXT, chatId);
         return new GeneralState();
     }

@@ -6,13 +6,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import java.util.ArrayList;
 import java.util.List;
 
-import static winglesspieces.WinglessService.collectDoubleList;
+import static winglesspieces.WinglessService.collectSolvedList;
 
-public class TelegramBotMenu {
+public class SolvedMenu implements Menu {
 
-
-    public static ReplyKeyboardMarkup prepareKeyboard(){
-        List<List<String>> doubleListOfMenuItems = collectDoubleList();
+    public ReplyKeyboardMarkup prepareKeyboard() {
+        List<List<String>> doubleListOfMenuItems = collectSolvedList();
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setSelective(true);
         keyboardMarkup.setResizeKeyboard(true);
@@ -22,7 +21,6 @@ public class TelegramBotMenu {
         keyboardRow.add("/a Все");
         keyboardRow.add("/s Решенные");
         keyboardRow.add("/u Нерешенные");
-        keyboardRow.add("/c Выдача");
         keyboard.add(keyboardRow);
         for (List<String> innerList : doubleListOfMenuItems) {
             keyboardRow = new KeyboardRow();
@@ -31,8 +29,12 @@ public class TelegramBotMenu {
             }
             keyboard.add(keyboardRow);
         }
+        keyboardRow = new KeyboardRow();
+        keyboardRow.add("/d Сомнительные");
+        keyboardRow.add("/c Выдача");
+        keyboardRow.add("/start Имя");
+        keyboard.add(keyboardRow);
         keyboardMarkup.setKeyboard(keyboard);
         return keyboardMarkup;
     }
-
 }

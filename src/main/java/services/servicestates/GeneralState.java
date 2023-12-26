@@ -1,5 +1,6 @@
 package services.servicestates;
 
+import botcontroller.SolvedMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 import services.UserRepository;
@@ -7,6 +8,7 @@ import services.UserRepository;
 import static services.CollectiveNotifier.notyfyAllUsers;
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
+import static services.UserRepository.setMenu;
 
 public class GeneralState implements ServiceState {
 
@@ -32,6 +34,7 @@ public class GeneralState implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
+        setMenu(chatId, new SolvedMenu());
         return new GeneralState();
     }
 

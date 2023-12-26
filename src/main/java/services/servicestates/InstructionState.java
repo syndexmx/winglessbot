@@ -1,8 +1,10 @@
 package services.servicestates;
 
+import botcontroller.MainMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 
+import static services.UserRepository.setMenu;
 import static winglesspieces.WinglessService.fetchAllTasks;
 
 public class InstructionState  implements ServiceState {
@@ -11,18 +13,8 @@ public class InstructionState  implements ServiceState {
             *Бескрылый* бот. Ассистент по бескрылкам\s
 
             Возможные команды:\s
-            /about      :о боте \s
-            /help       :помощь = список команд \s
-            /all        :показать все задания в базе \s
-            /solved     :показать решенные \s
-            /unsolved   :показать нерешенные \s
-            /start      :представиться \s
-            /add        :добавить бескрылок \s
-            /checkout   :блок ответов \s
-            #1          :вывести бескрылку №1 \s
-                после вывода бескрылки вводится ответ или новая команда \s
-                \s
-            Или отправьте сообщение всем пользователям бота - просто сообщение \s
+            Для управления используйте вкнопки меню внизу
+            Или отправьте сообщение всем пользователям бота \s
             """;
 
     @Override
@@ -33,6 +25,7 @@ public class InstructionState  implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
+        setMenu(chatId, new MainMenu());
         tController.sendMessage(INSTRUCTION_TEXT, chatId);
         return new GeneralState();
     }

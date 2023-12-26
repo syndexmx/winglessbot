@@ -1,5 +1,7 @@
 package services;
 
+import botcontroller.MainMenu;
+import botcontroller.Menu;
 import botcontroller.TelegramBotController;
 import services.servicestates.GeneralState;
 
@@ -9,11 +11,21 @@ public class IndividualService {
 
     private ServiceState state = new GeneralState();
 
+    private Menu menu = new MainMenu();
+
     private String alias = "Anonymous";
 
 
     public String getAlias() {
         return alias;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 
     public void setAlias(String alias) {
