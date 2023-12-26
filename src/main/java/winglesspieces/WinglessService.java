@@ -129,7 +129,7 @@ public class WinglessService {
                 count++;
             }
         }
-        sb.append("\n Итого нерешенных: "+ count+" \n");
+        sb.append("\n Итого: "+ count+" \n");
         return sb.toString();
     }
 
