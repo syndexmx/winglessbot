@@ -53,7 +53,7 @@ public class BringForwardState implements ServiceState {
                 return new GeneralState();
             }
             case ('.') -> {
-                tController.sendMessage("Введите Ответ на бескрылку (или новую команду, начинающуюся с / или #):", chatId);
+                tController.sendMessage("Введите Ответ на бескрылку (или выберите новую команду):", chatId);
                 return new AnswerState(winglessPieceIndex);
             }
             default -> {
