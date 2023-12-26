@@ -1,5 +1,6 @@
 package services.servicestates;
 
+import botcontroller.MainMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 import static services.UserRepository.setAlias;
+import static services.UserRepository.setMenu;
 import static winglesspieces.WinglessService.*;
 
 public class StartingState implements ServiceState {
@@ -34,6 +36,7 @@ public class StartingState implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String input, long chatId) {
+        setMenu(chatId, new MainMenu());
         tController.sendMessage( PROMPT_TEXT, chatId);
         return this;
     }

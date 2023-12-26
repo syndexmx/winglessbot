@@ -1,8 +1,10 @@
 package services.servicestates;
 
 import botcontroller.TelegramBotController;
+import botcontroller.UnsolvedMenu;
 import services.ServiceState;
 
+import static services.UserRepository.setMenu;
 import static winglesspieces.WinglessService.fetchAllTasks;
 import static winglesspieces.WinglessService.fetchUnsolvedTasks;
 
@@ -21,6 +23,7 @@ public class ShowUnsolvedState implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
+        setMenu(chatId, new UnsolvedMenu());
         tController.sendMessage(INTRO_TEXT+fetchUnsolvedTasks(), chatId);
         return new GeneralState();
     }

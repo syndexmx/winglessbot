@@ -1,10 +1,13 @@
 package services.servicestates;
 
+import botcontroller.MainMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
 import winglesspieces.WinglessService;
 
 import java.io.IOException;
+
+import static services.UserRepository.setMenu;
 
 public class AddState implements ServiceState {
 
@@ -32,6 +35,7 @@ public class AddState implements ServiceState {
     @Override
     public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
         int addedCount = WinglessService.addNewPortion(input);
+        setMenu(chatId, new MainMenu());
         tController.sendMessage("Добавлено бескрылок: " + addedCount, chatId);
         return new GeneralState();
     }

@@ -121,11 +121,15 @@ public class WinglessService {
 
 
     public static String fetchAllTasks(){
+        int count=0;
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
-            sb.append( winglessPiece.getComplete()+"\n\n");
+            if (true) {
+                sb.append(winglessPiece.getTask() + "\n\n");
+                count++;
+            }
         }
-        sb.append("\n Всего: "+ winglessBase.size()+" \n");
+        sb.append("\n Итого: "+ count+" \n");
         return sb.toString();
     }
 
@@ -134,6 +138,23 @@ public class WinglessService {
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
             if (winglessPiece.isSolved()) {
+                count++;
+                sb.append(winglessPiece.getComplete() + "\n");
+                if (!winglessPiece.isSure()){
+                    sb.append("? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
+                }
+                sb.append("\n\n");
+            }
+        }
+        sb.append("\n Итого решено: "+ count +" \n");
+        return sb.toString();
+    }
+
+    public static String fetchDoubtful(){
+        int count = 0;
+        StringBuilder sb = new StringBuilder();
+        for (WinglessPiece winglessPiece : winglessBase.values()){
+            if (winglessPiece.isSolved() && !winglessPiece.isSure()) {
                 count++;
                 sb.append(winglessPiece.getComplete() + "\n");
                 if (!winglessPiece.isSure()){
@@ -179,20 +200,85 @@ public class WinglessService {
         List<String> innerList = new ArrayList<>();
         int count = 0;
         for ( Integer index  : winglessBase.keySet()){
-            String buttonMarkup = "#"+index+" ";
+            String buttonMarkup = "#" + index;
             innerList.add(buttonMarkup);
             count ++;
-            if (count % 10  == 0){
+            if (count % 8  == 0){
                 outerList.add(innerList);
                 innerList =  new ArrayList<>();
             }
 
         }
-        if (count % 10 != 0){
+        if (count % 8 != 0){
             outerList.add(innerList);
         }
         return outerList;
     }
+
+    public static List<List<String>> collectUnsolvedList(){
+        List<List<String>> outerList = new ArrayList<>();
+        List<String> innerList = new ArrayList<>();
+        int count = 0;
+        for ( Integer index  : winglessBase.keySet()){
+            if (!winglessBase.get(index).isSolved()) {
+                String buttonMarkup = "#" + index;
+                innerList.add(buttonMarkup);
+                count++;
+                if (count % 8 == 0) {
+                    outerList.add(innerList);
+                    innerList = new ArrayList<>();
+                }
+            }
+        }
+        if (count % 8 != 0){
+            outerList.add(innerList);
+        }
+        return outerList;
+    }
+
+    public static List<List<String>> collectDoubtfulList(){
+        List<List<String>> outerList = new ArrayList<>();
+        List<String> innerList = new ArrayList<>();
+        int count = 0;
+        for ( Integer index  : winglessBase.keySet()){
+            if (winglessBase.get(index).isSolved() &&
+                    !winglessBase.get(index).isSure()) {
+                String buttonMarkup = "#" + index;
+                innerList.add(buttonMarkup);
+                count++;
+                if (count % 8 == 0) {
+                    outerList.add(innerList);
+                    innerList = new ArrayList<>();
+                }
+            }
+        }
+        if (count % 8 != 0){
+            outerList.add(innerList);
+        }
+        return outerList;
+    }
+
+    public static List<List<String>> collectSolvedList(){
+        List<List<String>> outerList = new ArrayList<>();
+        List<String> innerList = new ArrayList<>();
+        int count = 0;
+        for ( Integer index  : winglessBase.keySet()){
+            if (winglessBase.get(index).isSolved()) {
+                String buttonMarkup = "#" + index;
+                innerList.add(buttonMarkup);
+                count++;
+                if (count % 8 == 0) {
+                    outerList.add(innerList);
+                    innerList = new ArrayList<>();
+                }
+            }
+        }
+        if (count % 8 != 0){
+            outerList.add(innerList);
+        }
+        return outerList;
+    }
+
 
     public static void setWinglessPiecesBaseDat(String winglessPiecesBaseDat) {
         WinglessService.winglessPiecesBaseDat = winglessPiecesBaseDat;

@@ -1,12 +1,18 @@
 package services.servicestates;
 
+import botcontroller.BringForwardMenu;
+import botcontroller.MainMenu;
+import botcontroller.SolvedMenu;
 import botcontroller.TelegramBotController;
 import services.ServiceState;
+import services.UserRepository;
 
 import java.io.IOException;
 
+import static services.CollectiveNotifier.notyfyAllUsers;
 import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
+import static services.UserRepository.setMenu;
 import static winglesspieces.WinglessService.*;
 
 public class BringForwardState implements ServiceState {
@@ -51,6 +57,8 @@ public class BringForwardState implements ServiceState {
                 return new AnswerState(winglessPieceIndex);
             }
             default -> {
+                setMenu(chatId, new MainMenu());
+                notyfyAllUsers(UserRepository.getAlias(chatId) +":\n"+ input);
                 return new GeneralState();
             }
         }
@@ -62,7 +70,8 @@ public class BringForwardState implements ServiceState {
         winglessPieceIndex = number;
         String winglessPieceContent =
                 "Бескрылка #"+ number + ":\n\n" + getWinglessPieceByNumber(number)+"\n";
-        tController.sendMessage( PROMPT_TEXT + winglessPieceContent , chatId);
+        setMenu(chatId, new BringForwardMenu());
+        tController.sendMessage( winglessPieceContent , chatId);
         return this;
     }
 }
