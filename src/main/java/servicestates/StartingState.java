@@ -1,8 +1,7 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.MainMenu;
+import botmenus.MainMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 
 import java.io.IOException;
 
@@ -10,7 +9,6 @@ import static services.ServiceStateSwitcher.switchToMonoState;
 import static services.ServiceStateSwitcher.switchToState;
 import static services.UserRepository.setAlias;
 import static services.UserRepository.setMenu;
-import static winglesspieces.WinglessService.*;
 
 public class StartingState implements ServiceState {
 

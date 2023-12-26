@@ -1,7 +1,6 @@
-package services.servicestates;
+package servicestates;
 
 import botcontroller.TelegramBotController;
-import services.ServiceState;
 
 import static services.UserRepository.getAllActivatedUsers;
 

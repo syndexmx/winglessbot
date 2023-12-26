@@ -44,7 +44,7 @@ public class WinglessPiece implements Serializable {
     }
 
     public String getSolution() {
-        if (doubleWinged) return solution + "\\ \n" + secondSolution;
+        if (doubleWinged) return solution + ";\n" + secondSolution;
         return solution;
     }
 

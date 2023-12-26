@@ -1,7 +1,7 @@
 package services;
 
 import botcontroller.TelegramBotController;
-import services.servicestates.*;
+import servicestates.*;
 
 import static services.CollectiveNotifier.notyfyAllUsers;
 

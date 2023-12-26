@@ -1,14 +1,17 @@
-package services.servicestates;
+package servicestates;
 
-import botcontroller.MainMenu;
 import botcontroller.TelegramBotController;
-import services.ServiceState;
+import botmenus.UnsolvedMenu;
 
-import static botcontroller.BotLogger.getLastAction;
 import static services.UserRepository.setMenu;
-import static winglesspieces.WinglessService.fetchAllTasks;
+import static winglesspieces.WinglessService.fetchUnsolvedTasks;
 
-public class LastActionState  implements ServiceState {
+public class ShowUnsolvedState implements ServiceState {
+
+    final String INTRO_TEXT = """
+            Не решены:\s
+
+            """;
 
     @Override
     public ServiceState processRequest(TelegramBotController tController, String command, long chatId) {
@@ -18,8 +21,8 @@ public class LastActionState  implements ServiceState {
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
-        setMenu(chatId, new MainMenu());
-        tController.sendMessage(getLastAction(), chatId);
+        setMenu(chatId, new UnsolvedMenu());
+        tController.sendMessage(INTRO_TEXT+fetchUnsolvedTasks(), chatId);
         return new GeneralState();
     }
 }
