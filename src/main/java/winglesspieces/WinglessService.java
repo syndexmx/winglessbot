@@ -68,7 +68,17 @@ public class WinglessService {
     public static void registerASolution(int number, String answer, String actor) throws IOException {
         WinglessPiece currentPiece = winglessBase.get(number);
         currentPiece.setSolution(answer);
-        currentPiece.setSolved(true);
+        //currentPiece.setSolved(true);
+        pushUpdate();
+        CollectiveNotifier
+                .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
+                        + currentPiece.getComplete() + " \n\n *** решена ***\n" + actor );
+    }
+
+    public static void registerASecondSolution(int number, String answer, String actor) throws IOException {
+        WinglessPiece currentPiece = winglessBase.get(number);
+        currentPiece.setSecondSolution(answer);
+        //currentPiece.setSolved(true);
         pushUpdate();
         CollectiveNotifier
                 .notyfyAllUsers( "Бескрылка #"+ number +" \n\n"
@@ -77,7 +87,8 @@ public class WinglessService {
 
     public static void withdrawSolution(int number) throws IOException {
         WinglessPiece currentPiece = winglessBase.get(number);
-        currentPiece.setSolution("");
+        //currentPiece.setSecondSolution("...");
+        //currentPiece.setSolution("...");
         currentPiece.setSolved(false);
         pushUpdate();
         CollectiveNotifier
@@ -141,7 +152,7 @@ public class WinglessService {
                 count++;
                 sb.append(winglessPiece.getComplete() + "\n");
                 if (!winglessPiece.isSure()){
-                    sb.append("? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
+                    sb.append("\n ? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
                 }
                 sb.append("\n\n");
             }
@@ -158,12 +169,12 @@ public class WinglessService {
                 count++;
                 sb.append(winglessPiece.getComplete() + "\n");
                 if (!winglessPiece.isSure()){
-                    sb.append("? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
+                    sb.append("\n ? ? ? "+ winglessPiece.getSolution() +" ? ? ?  \n");
                 }
                 sb.append("\n\n");
             }
         }
-        sb.append("\n Итого решено: "+ count +" \n");
+        sb.append("\n Итого под сомнением: "+ count +" \n");
         return sb.toString();
     }
 

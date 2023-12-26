@@ -18,9 +18,10 @@ public class BringForwardMenu implements Menu{
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow keyboardRow = new KeyboardRow();
         keyboardRow = new KeyboardRow();
-        keyboardRow.add(". Ввести ответ");
-        keyboardRow.add("? Усомниться");
-        keyboardRow.add("! Подтвердить");
+        keyboardRow.add(". Крыло");
+        keyboardRow.add(": Крыло2");
+        keyboardRow.add("? Сомнение");
+        keyboardRow.add("! Утвердить");
         keyboardRow.add("& Отозвать");
         keyboard.add(keyboardRow);
         keyboardRow = new KeyboardRow();
