@@ -26,8 +26,8 @@ public class WinglessPiece implements Serializable {
     public WinglessPiece(String task) {
         this.task = task;
         this.complete = task;
-        if (task.indexOf("[")>=0){
-            if ( task.substring(task.indexOf("]")).indexOf("[")>=0){
+        if (task.indexOf("[") >= 0) {
+            if (task.substring(task.indexOf("]")).indexOf("[") >= 0) {
                 doubleWinged = true;
             } else {
                 doubleWinged = false;
@@ -74,10 +74,10 @@ public class WinglessPiece implements Serializable {
     public void setSecondSolution(String secondSolution) {
         this.secondSolution = secondSolution;
         String primary =  this.task;
-        String prefix = primary.substring(0, primary.indexOf("[")+1);
+        String prefix = primary.substring(0, primary.indexOf("[") + 1);
         String suffix = primary.substring(primary.indexOf("]"));
         if (doubleWinged){
-            String secondPrefix = suffix.substring(0, suffix.indexOf("[")+1);
+            String secondPrefix = suffix.substring(0, suffix.indexOf("[") + 1);
             String secondSuffix = suffix.substring(suffix.substring(1).indexOf("]"));
             suffix = secondPrefix + this.secondSolution + secondSuffix;
         }

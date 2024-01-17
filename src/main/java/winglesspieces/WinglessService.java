@@ -39,8 +39,7 @@ public class WinglessService {
         {
             try (
                     FileInputStream fIS = new FileInputStream(winglessPiecesBaseDat);
-                    ObjectInputStream oIS = new ObjectInputStream(fIS);
-            ) {
+                    ObjectInputStream oIS = new ObjectInputStream(fIS);) {
                 winglessBase.clear();
                 winglessBase = (Map) oIS.readObject();
                 oIS.close();
@@ -55,7 +54,7 @@ public class WinglessService {
     }
 
 
-    public static String getWinglessPieceByNumber(int number){
+    public static String getWinglessPieceByNumber(int number) {
         WinglessPiece currentPiece = winglessBase.get(number);
         StringBuilder sb = new StringBuilder();
         sb.append(currentPiece.getComplete());
@@ -131,7 +130,7 @@ public class WinglessService {
     }
 
 
-    public static String fetchAllTasks(){
+    public static String fetchAllTasks() {
         int count=0;
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
@@ -144,7 +143,7 @@ public class WinglessService {
         return sb.toString();
     }
 
-    public static String fetchSolvedTasks(){
+    public static String fetchSolvedTasks() {
         int count = 0;
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
@@ -161,10 +160,10 @@ public class WinglessService {
         return sb.toString();
     }
 
-    public static String fetchDoubtful(){
+    public static String fetchDoubtful() {
         int count = 0;
         StringBuilder sb = new StringBuilder();
-        for (WinglessPiece winglessPiece : winglessBase.values()){
+        for (WinglessPiece winglessPiece : winglessBase.values()) {
             if (winglessPiece.isSolved() && !winglessPiece.isSure()) {
                 count++;
                 sb.append(winglessPiece.getComplete() + "\n");
@@ -178,8 +177,8 @@ public class WinglessService {
         return sb.toString();
     }
 
-    public static String fetchUnsolvedTasks(){
-        int count=0;
+    public static String fetchUnsolvedTasks() {
+        int count = 0;
         StringBuilder sb = new StringBuilder();
         for (WinglessPiece winglessPiece : winglessBase.values()){
             if (!winglessPiece.isSolved()) {
@@ -191,7 +190,7 @@ public class WinglessService {
         return sb.toString();
     }
 
-    public static String fetchSolutions(){
+    public static String fetchSolutions() {
         int count = 0;
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Integer, WinglessPiece> winglessPieceEntry : winglessBase.entrySet()){
@@ -206,14 +205,14 @@ public class WinglessService {
         return sb.toString();
     }
 
-    public static List<List<String>> collectDoubleList(){
+    public static List<List<String>> collectDoubleList() {
         List<List<String>> outerList = new ArrayList<>();
         List<String> innerList = new ArrayList<>();
         int count = 0;
         for ( Integer index  : winglessBase.keySet()){
             String buttonMarkup = "#" + index;
             innerList.add(buttonMarkup);
-            count ++;
+            count++;
             if (count % 8  == 0){
                 outerList.add(innerList);
                 innerList =  new ArrayList<>();
@@ -226,7 +225,7 @@ public class WinglessService {
         return outerList;
     }
 
-    public static List<List<String>> collectUnsolvedList(){
+    public static List<List<String>> collectUnsolvedList() {
         List<List<String>> outerList = new ArrayList<>();
         List<String> innerList = new ArrayList<>();
         int count = 0;
@@ -247,7 +246,7 @@ public class WinglessService {
         return outerList;
     }
 
-    public static List<List<String>> collectDoubtfulList(){
+    public static List<List<String>> collectDoubtfulList() {
         List<List<String>> outerList = new ArrayList<>();
         List<String> innerList = new ArrayList<>();
         int count = 0;
@@ -269,7 +268,7 @@ public class WinglessService {
         return outerList;
     }
 
-    public static List<List<String>> collectSolvedList(){
+    public static List<List<String>> collectSolvedList() {
         List<List<String>> outerList = new ArrayList<>();
         List<String> innerList = new ArrayList<>();
         int count = 0;
@@ -294,5 +293,4 @@ public class WinglessService {
     public static void setWinglessPiecesBaseDat(String winglessPiecesBaseDat) {
         WinglessService.winglessPiecesBaseDat = winglessPiecesBaseDat;
     }
-
 }

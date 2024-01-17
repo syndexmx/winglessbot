@@ -24,18 +24,15 @@ public class GeneralState implements ServiceState {
                 return switchToMonoState(tController, request, chatId);
             }
             default -> {
-                notyfyAllUsers(UserRepository.getAlias(chatId) +":\n"+ request);
+                notyfyAllUsers(UserRepository.getAlias(chatId) + ":\n" + request);
                 return new GeneralState();
             }
         }
         //return this;
     }
-
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
         setMenu(chatId, new SolvedMenu());
         return new GeneralState();
     }
-
-
 }

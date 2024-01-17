@@ -32,7 +32,8 @@ public class AddState implements ServiceState {
            """;
 
     @Override
-    public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
+    public ServiceState processRequest(TelegramBotController tController, String input, long chatId)
+            throws IOException {
         int addedCount = WinglessService.addNewPortion(input);
         setMenu(chatId, new MainMenu());
         tController.sendMessage("Добавлено бескрылок: " + addedCount, chatId);

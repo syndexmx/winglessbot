@@ -13,8 +13,8 @@ public class CollectiveNotifier {
         CollectiveNotifier.tController = tController;
     }
 
-    public static void notyfyAllUsers(String text){
-        for (Long longInteger : getAllActivatedUsers() ){
+    public static void notyfyAllUsers(String text) {
+        for (Long longInteger : getAllActivatedUsers()) {
             tController.sendMessage(text, longInteger);
         }
     }

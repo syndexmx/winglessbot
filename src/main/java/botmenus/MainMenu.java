@@ -38,5 +38,4 @@ public class MainMenu implements Menu {
         keyboardMarkup.setKeyboard(keyboard);
         return keyboardMarkup;
     }
-
 }
