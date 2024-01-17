@@ -15,7 +15,6 @@ public class ShowDoubtfulState implements ServiceState {
 
     @Override
     public ServiceState processRequest(TelegramBotController tController, String command, long chatId) {
-
         return new GeneralState();
     }
 

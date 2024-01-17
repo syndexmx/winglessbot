@@ -16,7 +16,6 @@ public class IndividualService {
 
     private String alias = "Anonymous";
 
-
     public String getAlias() {
         return alias;
     }
@@ -37,13 +36,8 @@ public class IndividualService {
         this.state = state;
     }
 
-    public void parseCommand(TelegramBotController tController, String request, long chatId) throws IOException {
+    public void parseCommand(TelegramBotController tController, String request, long chatId)
+            throws IOException {
         setState(state.processRequest(tController, request, chatId));
-
     }
-
-
-
-
-
 }

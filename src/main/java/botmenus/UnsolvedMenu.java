@@ -11,7 +11,7 @@ import static winglesspieces.WinglessService.collectUnsolvedList;
 public class UnsolvedMenu implements Menu {
 
 
-    public ReplyKeyboardMarkup prepareKeyboard(){
+    public ReplyKeyboardMarkup prepareKeyboard() {
         List<List<String>> doubleListOfMenuItems = collectUnsolvedList();
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setSelective(true);

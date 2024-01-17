@@ -10,7 +10,7 @@ public class UserRepository {
 
     static Map<Long, IndividualService> usersRepository = new HashMap<>();
 
-    public static IndividualService getIndividualService(long id){
+    public static IndividualService getIndividualService(long id) {
         if ( usersRepository.containsKey(id) ){
             return usersRepository.get(id);
         } else {
@@ -21,22 +21,22 @@ public class UserRepository {
 
     }
 
-    public static void setAlias(long chatId, String alias){
+    public static void setAlias(long chatId, String alias) {
         IndividualService iService = usersRepository.get(chatId);
         iService.setAlias(alias);
     }
 
-    public static void setMenu(long chatId, Menu menu){
+    public static void setMenu(long chatId, Menu menu) {
         IndividualService iService = usersRepository.get(chatId);
         iService.setMenu(menu);
     }
 
-    public static Menu getMenu(long chatId){
+    public static Menu getMenu(long chatId) {
         IndividualService iService = usersRepository.get(chatId);
         return iService.getMenu();
     }
 
-    public static String getAlias(long chatId){
+    public static String getAlias(long chatId) {
         IndividualService iService = usersRepository.get(chatId);
         return iService.getAlias();
     }
@@ -44,5 +44,4 @@ public class UserRepository {
     public static Collection<Long> getAllActivatedUsers(){
         return usersRepository.keySet();
     }
-
 }

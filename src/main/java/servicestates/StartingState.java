@@ -15,7 +15,8 @@ public class StartingState implements ServiceState {
     final String PROMPT_TEXT = "Представьтесь, пожалуйста, для удобства: ";
 
     @Override
-    public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
+    public ServiceState processRequest(TelegramBotController tController, String input, long chatId)
+            throws IOException {
         char ch = input.charAt(0);
         switch (ch) {
             case ('/') -> {

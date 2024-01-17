@@ -15,14 +15,13 @@ public class ShowUnsolvedState implements ServiceState {
 
     @Override
     public ServiceState processRequest(TelegramBotController tController, String command, long chatId) {
-
         return new GeneralState();
     }
 
     @Override
     public ServiceState onEnter(TelegramBotController tController, String s, long chatId) {
         setMenu(chatId, new UnsolvedMenu());
-        tController.sendMessage(INTRO_TEXT+fetchUnsolvedTasks(), chatId);
+        tController.sendMessage(INTRO_TEXT + fetchUnsolvedTasks(), chatId);
         return new GeneralState();
     }
 }

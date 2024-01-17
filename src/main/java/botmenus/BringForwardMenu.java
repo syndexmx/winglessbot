@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BringForwardMenu implements Menu{
 
-    public ReplyKeyboardMarkup prepareKeyboard(){
+    public ReplyKeyboardMarkup prepareKeyboard() {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setSelective(true);
         keyboardMarkup.setResizeKeyboard(true);
@@ -36,5 +36,4 @@ public class BringForwardMenu implements Menu{
         keyboardMarkup.setKeyboard(keyboard);
         return keyboardMarkup;
     }
-
 }

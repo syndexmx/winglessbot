@@ -45,11 +45,11 @@ public class TelegramBotController extends TelegramLongPollingBot {
     }
 
 
-    public void sendMessage (String m, long chatId){
+    public void sendMessage (String m, long chatId) {
         // How to from  https://github.com/rubenlagus/TelegramBots/wiki/Getting-Started
         SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
         message.setChatId(chatId);
-        message.setText( m );
+        message.setText(m);
         message.setReplyMarkup(getMenu(chatId).prepareKeyboard());
         // message.setParseMode("markdown");
 

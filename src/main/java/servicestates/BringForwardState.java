@@ -26,7 +26,8 @@ public class BringForwardState implements ServiceState {
             \s
             """;
     @Override
-    public ServiceState processRequest(TelegramBotController tController, String input, long chatId) throws IOException {
+    public ServiceState processRequest(TelegramBotController tController, String input, long chatId)
+            throws IOException {
         char ch = input.charAt(0);
         switch (ch) {
             case ('/') -> {
@@ -54,7 +55,8 @@ public class BringForwardState implements ServiceState {
                 return new GeneralState();
             }
             case ('.') -> {
-                tController.sendMessage("Введите Ответ на бескрылку (или выберите новую команду):", chatId);
+                tController.sendMessage("Введите Ответ на бескрылку (или выберите новую команду):",
+                        chatId);
                 return new AnswerState(winglessPieceIndex);
             }
             case (':') -> {
@@ -63,7 +65,7 @@ public class BringForwardState implements ServiceState {
             }
             default -> {
                 setMenu(chatId, new MainMenu());
-                notyfyAllUsers(UserRepository.getAlias(chatId) +":\n"+ input);
+                notyfyAllUsers(UserRepository.getAlias(chatId) + ":\n" + input);
                 return new GeneralState();
             }
         }
@@ -74,9 +76,9 @@ public class BringForwardState implements ServiceState {
         int number = Integer.parseInt(input.substring(1));
         winglessPieceIndex = number;
         String winglessPieceContent =
-                "Бескрылка #"+ number + ":\n\n" + getWinglessPieceByNumber(number)+"\n";
+                "Бескрылка #" + number + ":\n\n" + getWinglessPieceByNumber(number) + "\n";
         setMenu(chatId, new BringForwardMenu());
-        tController.sendMessage( winglessPieceContent , chatId);
+        tController.sendMessage(winglessPieceContent, chatId);
         return this;
     }
 }

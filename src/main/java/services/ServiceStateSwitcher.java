@@ -7,7 +7,7 @@ import static services.CollectiveNotifier.notyfyAllUsers;
 
 public class ServiceStateSwitcher {
 
-    public static ServiceState switchToState(TelegramBotController tController, String s, long chatId){
+    public static ServiceState switchToState(TelegramBotController tController, String s, long chatId) {
         ServiceState state;
         String[] instructions = s.split("\n")[0].split(" ");
         String instruction = instructions[0];

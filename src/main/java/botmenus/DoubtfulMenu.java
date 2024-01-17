@@ -10,7 +10,7 @@ import static winglesspieces.WinglessService.collectDoubtfulList;
 
 public class DoubtfulMenu implements Menu {
 
-    public ReplyKeyboardMarkup prepareKeyboard(){
+    public ReplyKeyboardMarkup prepareKeyboard() {
         List<List<String>> doubleListOfMenuItems = collectDoubtfulList();
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setSelective(true);
